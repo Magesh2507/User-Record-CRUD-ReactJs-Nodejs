@@ -1,0 +1,154 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+}
+
+.container{
+    width: 100%;
+    margin: 20px auto;
+}
+
+.container h1{
+    color: rgb(3, 167, 3);
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.input-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+input{
+    padding: 10px;
+    border-radius: 5px;
+    outline: rgb(0, 132, 255);
+    width: 300px;
+    border:1px solid #ccc;
+}
+
+.add-btn{
+    font-weight: 600;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(0, 110, 255);
+}
+
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+th{
+    background-color: #dddddd;
+    padding:10px;
+
+}
+th,td{
+    border: 2px solid #ccc;
+    text-align: center;
+    padding:10px;
+}
+
+tr:nth-child(even){
+    background-color: #eeeeee;
+}
+
+tr:hover{
+    background-color: rgb(195 206 221 / 68%);
+}
+
+.table-btn {
+    border-radius: 5px;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.edit{
+    background-color: rgb(46, 135, 236);
+    color: white;
+}
+.delete{
+    background-color: #ff4f00;
+    color: white;
+}
+
+.modal-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.56);
+}
+
+.record-container{
+    width: 500px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px rgba(10, 10, 10, 0.226);
+    padding: 20px;
+    position: relative;
+}
+
+.record-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.record-container input{
+    margin-bottom: 10px;
+    width: 100%;
+
+}
+.btn-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.add-rec-btn{
+    padding: 10px 15px;
+    background-color: rgb(6, 145, 6) ;
+    color: white;
+    border: none;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.close-btn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px 10px;
+    border: none;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 20px;
+    background-color: white;
+}
+
+.close-btn:hover{
+    background-color: #eee;
+}
+
+.error-message{
+    color: red;
+    text-align: center;
+    margin: 20px auto;
+}

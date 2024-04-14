@@ -152,3 +152,10 @@ tr:hover{
     text-align: center;
     margin: 20px auto;
 }
+.no-data{
+    text-align: center;
+    color: gray;
+    font-weight: 600;
+    font-size: large;
+    margin: 50px auto;
+}

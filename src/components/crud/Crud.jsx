@@ -14,7 +14,7 @@ const Crud = () => {
     }, [])
 
     const getUsers = async () => {
-        await axios.get('http://localhost:8000/users').then(res => {
+        await axios.get('https://user-crud-reactjs-nodejs.onrender.com/users').then(res => {
             setUsers(res.data)
             setFilteredUsers(res.data)
         }).catch(err => console.log(err))
@@ -45,14 +45,14 @@ const Crud = () => {
         if (newUser.name && newUser.age && newUser.city) {
 
             if (newUser.id) {
-                await axios.patch(`http://localhost:8000/users/${newUser.id}`, newUser).then(res => {
+                await axios.patch(`https://user-crud-reactjs-nodejs.onrender.com/users/${newUser.id}`, newUser).then(res => {
                     setUsers(res.data.data)
                     setFilteredUsers(res.data.data)
                 }).catch(err => console.log(err))
             }
 
             else {
-                await axios.post('http://localhost:8000/users', newUser).then(res => {
+                await axios.post('https://user-crud-reactjs-nodejs.onrender.com/users', newUser).then(res => {
                     setUsers(res.data.data)
                     setFilteredUsers(res.data.data)
                 }).catch(err => console.log(err))
@@ -75,7 +75,7 @@ const Crud = () => {
 
     const deleteUser = async (id) => {
         if (window.confirm("Confirm to delete User")) {
-            await axios.delete(`http://localhost:8000/users/${id}`).then(res => {
+            await axios.delete(`https://user-crud-reactjs-nodejs.onrender.com/users/${id}`).then(res => {
                 setUsers(res.data.data)
                 setFilteredUsers(res.data.data)
             }).catch(err => console.log(err))

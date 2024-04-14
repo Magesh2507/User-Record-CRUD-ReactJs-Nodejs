@@ -8,6 +8,8 @@ const Crud = () => {
     const [ismodal, setIsModal] = useState(false)
     const [newUser, setNewUser] = useState({ name: "", age: "", city: "" })
     const [isError, setIsError] = useState(false)
+    const [noData, setNoData] = useState(false)
+    const [isAddingRecord, setIsAddingRecord] = useState(false);
 
     useEffect(() => {
         getUsers()
@@ -22,9 +24,10 @@ const Crud = () => {
 
     const search = (e) => {
         const text = e.target.value.toLowerCase()
-        console.log(text)
         const filtered = users.filter(user => user.name.toLowerCase().includes(text) || user.city.toLowerCase().includes(text))
-        setFilteredUsers(filtered)
+        if(!filtered.length){setNoData(true)}  
+        else{setNoData(false)      
+        setFilteredUsers(filtered)}
     }
 
     const addRecord = () => {
@@ -43,7 +46,7 @@ const Crud = () => {
     const handleSubmit = async () => {
 
         if (newUser.name && newUser.age && newUser.city) {
-
+            setIsAddingRecord(true);
             if (newUser.id) {
                 await axios.patch(`https://user-crud-reactjs-nodejs.onrender.com/users/${newUser.id}`, newUser).then(res => {
                     setUsers(res.data.data)
@@ -60,7 +63,7 @@ const Crud = () => {
             setIsError(false)
             setIsModal(false)
             setNewUser({ name: "", age: "", city: "" })
-
+            setIsAddingRecord(false);
         }
         else {
             setIsError(true)
@@ -94,31 +97,34 @@ const Crud = () => {
                 <input placeholder='search' onChange={search} />
                 <button className='add-btn' onClick={addRecord}>Add Record</button>
             </div>
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>S.No</th>
-                            <th>Name</th>
-                            <th>Age</th>
-                            <th>City</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredUsers && filteredUsers.map((user, index) => (
-                            <tr key={user.id}>
-                                <td>{index + 1}</td>
-                                <td>{user.name}</td>
-                                <td>{user.age}</td>
-                                <td>{user.city}</td>
-                                <td><button className='table-btn edit' onClick={() => editUser(user)}>Edit</button></td>
-                                <td><button className='table-btn delete' onClick={() => deleteUser(user.id)}>Delete</button></td>
-                            </tr>))}
-                    </tbody>
-                </table>
-            </div>
+            {!noData ?(
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>City</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredUsers && filteredUsers.map((user, index) => (
+                                <tr key={user.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.age}</td>
+                                    <td>{user.city}</td>
+                                    <td><button className='table-btn edit' onClick={() => editUser(user)}>Edit</button></td>
+                                    <td><button className='table-btn delete' onClick={() => deleteUser(user.id)}>Delete</button></td>
+                                </tr>))}
+                        </tbody>
+                    </table>
+                </div>):(
+                    <div className='no-data'>No data found</div>
+                )}
             {ismodal && <div className='modal-container'>
                 <div className='modal'>
 
@@ -131,7 +137,8 @@ const Crud = () => {
                         <input id='age' type='number' name='age' value={newUser.age} onChange={handleChange}></input>
                         <label htmlFor='city' >City</label>
                         <input id='city' type='text' name='city' value={newUser.city} onChange={handleChange}></input>
-                        <div className='btn-div'><button className='add-rec-btn' onClick={handleSubmit}>Add Record</button></div>
+                        <div className='btn-div'><button className='add-rec-btn' onClick={handleSubmit} disabled={isAddingRecord}>
+                    {isAddingRecord ? 'Adding Record...' : 'Add Record'}</button></div>
                     </div>
                 </div>
             </div>

@@ -94,7 +94,8 @@ tr:hover{
 }
 
 .record-container{
-    width: 500px;
+    max-width: 500px;
+    width: 100vw;
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 3px 3px rgba(10, 10, 10, 0.226);
